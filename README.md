@@ -1,8 +1,8 @@
 # claude-bridge
 
-> Shared context bus. What you copy in Cursor is what Claude Desktop sees. What you select in your terminal is what your IDE knows.
+> Shared context bus. What you copy in Cursor is what Claude Desktop sees.
 
-**Status:** v0.1 — planning. Not yet released.
+**Status:** v0.1 — in development.
 
 **Sovereignty:** sovereign-by-construction. BYO endpoint, BYO key, BYO model.
 A local-only configuration is documented and tested.
@@ -14,22 +14,39 @@ Best-effort community shovel — no SLA, no roadmap commitments.
 
 ## What this is
 
-Shared context bus. What you copy in Cursor is what Claude Desktop sees. What you select in your terminal is what your IDE knows.
+Shared context bus. What you copy in Cursor is what Claude Desktop sees.
 
 ## What this isn't
 
-Not a clipboard manager. Not a snippet store. Not a productivity suite.
+See [PRD-v1.md](./PRD-v1.md) for the full anti-scope definition.
 
 ## Install
 
-> Coming with v0.1 release.
+### From package manager (when v0.1 ships)
+
+```bash
+cargo install claude-bridge
+```
+
+### Build from source
+
+```bash
+git clone https://github.com/sovereign-shovels/claude-bridge.git
+cd claude-bridge
+```
+# Build release binary
+cargo build --release
+
+# Or install directly
+cargo install --path .
+```
 
 ## Configure
 
 You bring the model. By default `claude-bridge` tries to use a local provider:
 
 - For LLM endpoints: Ollama at `http://localhost:11434`
-- For voice endpoints: configurable, see [docs/configure.md]
+- For voice endpoints: configurable, see docs
 
 To use any other provider (Claude, GPT, Hermes, OpenRouter, Sarvam, etc.):
 
@@ -46,7 +63,7 @@ LM Studio, and vLLM all work via their OpenAI-compatible endpoints.
 
 ## Why this exists
 
-Claude Desktop knows what you're saying. Cursor knows what you're editing. Your terminal knows what you just selected. None of them know about the others. claude-bridge is a local context bus: a daemon that broadcasts clipboard, active selection, and recent files over a local socket so subscribers can pull the right context.
+See [PRD-v1.md](./PRD-v1.md) for the problem statement and rationale.
 
 ## What's next
 
