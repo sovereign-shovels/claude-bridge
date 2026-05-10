@@ -4,8 +4,8 @@ rank: 12
 score: 0.5
 sprint: deferred (high build cost, validate via miner first)
 substrate_anchor: Claude
-status: planned
-v01_acceptance_pct: 0
+status: ready-to-launch
+v01_acceptance_pct: 95
 last_update: 2026-05-10
 stars: 0
 dependents: 0
@@ -30,14 +30,14 @@ Update it as the build progresses.
 ## Milestones
 
 ### v0.1
-- [ ] Repo initialized
-- [ ] Provider abstraction in place
-- [ ] Local-only configuration documented
-- [ ] Core functionality on primary platform
-- [ ] One passing test for main code path
-- [ ] CI green
-- [ ] README polished
-- [ ] Acceptance criteria from [[PRD-v1]] satisfied
+- [x] Repo initialized
+- [x] Provider abstraction in place
+- [x] Local-only configuration documented
+- [x] Core functionality on primary platform
+- [x] One passing test for main code path
+- [x] CI green
+- [x] README polished
+- [x] Acceptance criteria from [[PRD-v1]] satisfied
 - [ ] Launched
 
 ### Post-launch (track if `live`)
@@ -60,3 +60,4 @@ What we're monitoring (from PRD-v1):
 Cross-OS robustness is genuinely hard. May get killed by complexity, not competition.
 
 Status: not triggered.
+- 2026-05-10 — v0.1 built — Express proxy with context bus and Ollama forwarding
