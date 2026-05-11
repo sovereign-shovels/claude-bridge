@@ -61,3 +61,4 @@ Cross-OS robustness is genuinely hard. May get killed by complexity, not competi
 
 Status: not triggered.
 - 2026-05-10 — v0.1 built — Express proxy with context bus and Ollama forwarding
+- 2026-05-10 — hardened against local Ollama — all CLI paths verified, compile+tests green

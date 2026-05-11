@@ -6,6 +6,24 @@
 
 **Sovereignty:** sovereign-by-construction. Local socket daemon. No cloud.
 
+## Architecture
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
+│  Clipboard  │────▶│              │     │   /v1/messages  │
+│  Selection  │────▶│   claude-    │────▶│   (proxy to     │
+│  File       │────▶│   bridge     │     │   Ollama /      │
+│  changes    │     │  (context    │     │   Claude API)   │
+└─────────────┘     │   bus)       │     └─────────────────┘
+                    └──────────────┘              │
+                           │                      ▼
+                           ▼               ┌──────────────┐
+                    ┌──────────────┐       │  LLM response│
+                    │  /context    │       │  + injected  │
+                    │  (recent 3)  │       │  context     │
+                    └──────────────┘       └──────────────┘
+```
+
 ---
 
 ## Install
@@ -30,6 +48,24 @@ The bridge listens on `http://localhost:3456` and:
 - Accepts `/context` POSTs (clipboard, selection, file changes)
 - Serves `/context` GET for recent context
 - Proxies `/v1/messages` to Ollama with context injection
+
+**Demo:**
+```bash
+# Start the bridge
+PORT=3457 node dist/index.js
+
+# Inject context
+curl -X POST http://localhost:3457/context \
+  -H "Content-Type: application/json" \
+  -d '{"type":"clipboard","content":"Rust ownership rules"}'
+
+# Chat with context automatically prepended
+curl -X POST http://localhost:3457/v1/messages \
+  -H "Content-Type: application/json" \
+  -d '{"model":"gemma4:latest","messages":[{"role":"user","content":"Explain it"}]}'
+
+# Response: {"choices":[{"message":{"content":"Hello! 😊"}}]}
+```
 
 ---
 
